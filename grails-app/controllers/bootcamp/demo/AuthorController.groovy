@@ -22,4 +22,11 @@ class AuthorController {
         }
         render(author.books.size())
     }
+
+    //http://localhost:8080/Controllers-II/author/multipleDomain?book.title=grails-from-multipledomain&author.name= author-multipledomain
+    def multipleDomain(){
+        Book book = new Book(params['book'])
+        Author author = new Author(params['author'])
+        render ("Book :: ${book.title} -- Author :: ${author.name}")
+    }
 }
