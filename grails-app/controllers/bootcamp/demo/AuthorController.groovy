@@ -1,5 +1,7 @@
 package bootcamp.demo
 
+import demo.bootcamp.ForgotPassword
+
 class AuthorController {
 
     def scaffold = true
@@ -20,13 +22,25 @@ class AuthorController {
         author.books.each {
             println "#### ${it.title}"
         }
-        render(author.books.size())
+        render("Done")
     }
 
     //http://localhost:8080/Controllers-II/author/multipleDomain?book.title=grails-from-multipledomain&author.name= author-multipledomain
-    def multipleDomain(){
+    def multipleDomain() {
         Book book = new Book(params['book'])
         Author author = new Author(params['author'])
-        render ("Book :: ${book.title} -- Author :: ${author.name}")
+        render("Book :: ${book.title} -- Author :: ${author.name}")
+    }
+
+    def commandObj = { RegisterCommand registerCommand, ForgotPassword forgotPasswordComm ->
+        render("Hello")
+    }
+}
+
+class RegisterCommand {
+    String email
+
+    static constraints = {
+        email(email: true, nullable: false)
     }
 }
